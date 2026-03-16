@@ -2,6 +2,8 @@ import type { APIRoute } from 'astro';
 import Anthropic from '@anthropic-ai/sdk';
 import { getCollection } from 'astro:content';
 
+export const prerender = false;
+
 // In-memory cache so we only call Claude once per slug per server session
 const cache = new Map<string, string>();
 
@@ -50,8 +52,9 @@ ${post.body}`,
 
     return json({ summary: raw });
   } catch (err) {
-    console.error('[summarize]', err);
-    return json({ error: 'Failed to generate summary' }, 500);
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error('[summarize]', msg);
+    return json({ error: msg }, 500);
   }
 };
 

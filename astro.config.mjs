@@ -1,12 +1,13 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
-import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import pagefind from "astro-pagefind";
+import node from "@astrojs/node";
 
 export default defineConfig({
-  site: "http://blog.njox.dev/",
+  site: "https://blog.njox.dev/",
   output: "hybrid",
+  adapter: node({ mode: "standalone" }),
   build: { format: "directory" },
-  integrations: [mdx(), sitemap(), tailwind(), pagefind()],
+  integrations: [mdx(), tailwind(), pagefind()],
 });

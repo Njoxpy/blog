@@ -1,0 +1,176 @@
+---
+title: Lessons Learned from Deploying My First Project on DigitalOcean
+date: 2025-06-21
+tags: ['digitalocean', 'development', 'deployment', 'server']
+draft: false
+description: I finally shipped my first full-stack project live using DigitalOcean. Here’s the good, the bad, and the power moves I picked up during the journey.
+authors: ['default']
+---
+
+## 🧠 **Intro: From Tutorial Hell to Deployment Heaven**
+
+One thing I’ve learned in this dev game? **Applying what you’ve learned** hits different compared to binging tutorials. That’s how you escape tutorial hell and actually _build something_.
+
+This post is a brain dump of lessons I picked up while deploying my first full-stack app on **DigitalOcean** — raw, real, and 100% from the trenches.
+
+---
+
+## 💡 **Key Takeaways**
+
+### 1. **Write Clean, Optimized Code — For Real**
+
+Messy code = painful deployments. I learned real quick that clean code means:
+
+- Clear structure
+- No unused dependencies
+- Lean, maintainable logic
+
+Don’t hoard dead code. Delete what you’re not using. Seriously — your server will thank you.
+
+---
+
+### 2. **Vim Is Your Terminal BFF**
+
+No VSCode on a server, no drag-and-drop — just terminal. That’s where **Vim** comes in.
+
+Here’s the cheat sheet I lived by:
+
+```bash
+# Navigation
+w, b, gg, G
+
+# Editing
+i, a, dd, yy, p
+
+# Visual mode, splits, and customizations
+.vimrc → personalize your dev flow
+```
+
+If you’re working on Linux, learn Vim. No way around it. **Jifunze vizuri.**
+
+---
+
+### 3. **Learn Basic Networking (It’s Not Optional)**
+
+You don’t care about DNS… until your site won’t load.
+
+Understand this:
+
+```bash
+A record       → points your domain to the server
+CNAME          → alias for another domain
+DNS propagation → takes up to 48 hrs (be patient)
+dig / nslookup → debug domain issues
+```
+
+Skip this stuff and you’ll panic when things break. Learn it early.
+
+---
+
+### 4. **Linux CLI Tools: Get Your Hands Dirty**
+
+You’ll live in the terminal. These are your essentials:
+
+```bash
+systemctl      → manage services (start, stop, restart)
+ssh            → remote login
+pm2            → keep Node.js apps alive
+journalctl     → read logs like a boss
+```
+
+Also know your way around `cd`, `ls`, `chmod`, `chown`, and bash scripting. Real sysadmin energy. ⚡
+
+---
+
+### 5. **NGINX Is a Straight-Up Beast**
+
+I used to think NGINX was just for static files. Nah, it’s a whole world.
+
+```bash
+Reverse proxy    → route traffic to different services
+SSL termination  → serve HTTPS with Let's Encrypt
+Caching & gzip   → optimize performance
+Load balancing   → scale like a pro
+```
+
+Once you understand **server blocks**, you're no longer a rookie.
+
+---
+
+### 6. **curl > Postman (Sometimes)**
+
+Postman is great, but when you're on a server?
+
+```bash
+curl https://api.com                    # GET
+curl -X POST -d "key=value" https://…  # POST
+curl -H "Authorization: Bearer xyz"    # Headers
+```
+
+`curl` is fast, native, and perfect for quick API tests — no GUI needed.
+
+---
+
+### 7. **Use `scp` to Move Fast and Save Space**
+
+Running out of server space? Don’t upload files manually — use `scp`.
+
+```bash
+# Local → Remote
+scp myfile.zip root@your-server:/home/myfolder
+
+# Remote → Local
+scp root@your-server:/var/log/nginx/error.log .
+```
+
+Simple, efficient, secure. Just works.
+[man page](https://linux.die.net/man/1/scp)
+
+---
+
+## 🎯 **What I’m Learning Next: Level-Up Roadmap**
+
+This project opened my eyes. Here’s where I’m leveling up next:
+
+### 🔧 **Linux & System Admin**
+
+- File permissions: `chmod`, `chown`
+- Process control: `top`, `kill`, `htop`
+- Cron jobs & automation
+- User + group management
+
+### 🌐 **Deep-Dive NGINX**
+
+- Advanced reverse proxy configs
+- Caching layers + gzip compression
+- Load balancing & failover setups
+
+### 🚀 **DevOps & CI/CD**
+
+- GitHub Actions for automated deploys
+- Docker + Docker Compose
+- Jenkins / GitLab CI pipelines
+- Deployment workflows (auto, rollback, health checks)
+
+### ☁️ **Cloud Game Strong**
+
+- AWS / GCP / Azure basics
+- EC2, S3, IAM, VPC
+- Serverless (Lambda, Firebase Functions)
+- Cloud cost optimization
+
+### 🎓 **Certifications I'm Eyeing**
+
+- Google IT Support
+- Google Cloud Digital Leader
+- Cloud Fundamentals
+
+---
+
+## ✅ **Final Thoughts**
+
+This deployment journey humbled me and hyped me up all at once.
+
+**Let’s keep going. 🚀**
+
+---
