@@ -4,6 +4,8 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 ---
 
+<link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+
 <Base title="Search">
   <Header />
 
@@ -59,7 +61,7 @@ import Footer from '../components/Footer.astro';
   }
 </style>
 
-<script>
+<script is:inline>
   import('/pagefind/pagefind-ui.js').then(({ PagefindUI }) => {
     new PagefindUI({
       element: '#search',
@@ -68,6 +70,6 @@ import Footer from '../components/Footer.astro';
     });
   }).catch(() => {
     const el = document.getElementById('search');
-    if (el) el.innerHTML = '<p class="text-sm text-ink-400">Search index not available in dev mode. Run <code class="font-mono">npm run build</code> first.</p>';
+    if (el) el.innerHTML = '<p style="font-size:0.875rem;color:#87877a;">Search index not available in dev mode. Run <code style="font-family:monospace;">npm run build</code> first.</p>';
   });
 </script>

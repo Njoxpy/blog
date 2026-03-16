@@ -12,13 +12,32 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 
 // Rough reading time estimate
 const wordsPerMinute = 200;
 const words = post.body.trim().split(/\s+/).length;
 const minutes = Math.max(1, Math.round(words / wordsPerMinute));
 const minutesRead = `${minutes} min read`;
+
+// Related posts: same tags, sorted by overlap, max 3
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+const related = allPosts
+  .filter(p => p.slug !== post.slug)
+  .map(p => ({
+    ...p,
+    overlap: p.data.tags.filter(t => post.data.tags.includes(t)).length,
+  }))
+  .filter(p => p.overlap > 0)
+  .sort((a, b) => b.overlap - a.overlap || b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3)
+  .map(p => ({
+    slug: p.slug,
+    title: p.data.title,
+    description: p.data.description,
+    date: p.data.date,
+    tags: p.data.tags,
+  }));
 ---
 
 <BlogPost
@@ -28,6 +47,12 @@ const minutesRead = `${minutes} min read`;
   updatedDate={post.data.updatedDate}
   tags={post.data.tags}
   minutesRead={minutesRead}
+  slug={post.slug}
+  cover={post.data.cover}
+  sponsored={post.data.sponsored}
+  affiliateLinks={post.data.affiliateLinks}
+  headings={headings}
+  relatedPosts={related}
 >
   <Content />
 </BlogPost>

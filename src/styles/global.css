@@ -42,4 +42,18 @@
     @apply underline underline-offset-4 decoration-ink-300 dark:decoration-ink-600
            hover:decoration-accent transition-colors duration-150;
   }
+
+  .copy-btn {
+    @apply absolute top-3 right-3
+           flex items-center justify-center
+           w-7 h-7 rounded-md
+           text-ink-400 dark:text-ink-500
+           bg-ink-800/60 dark:bg-ink-700/60
+           hover:text-ink-50 hover:bg-ink-700 dark:hover:bg-ink-600
+           opacity-0 transition-all duration-150;
+  }
+
+  pre:hover .copy-btn {
+    @apply opacity-100;
+  }
 }

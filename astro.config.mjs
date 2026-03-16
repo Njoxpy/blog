@@ -6,6 +6,7 @@ import pagefind from "astro-pagefind";
 
 export default defineConfig({
   site: "http://blog.njox.dev/",
+  output: "hybrid",
   build: { format: "directory" },
   integrations: [mdx(), sitemap(), tailwind(), pagefind()],
 });

@@ -10,6 +10,8 @@ const posts = defineCollection({
     draft: z.boolean().default(false),
     updatedDate: z.coerce.date().optional(),
     cover: z.string().optional(),
+    sponsored: z.boolean().default(false),
+    affiliateLinks: z.boolean().default(false),
   }),
 });
 

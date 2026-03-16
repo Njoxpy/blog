@@ -5,9 +5,10 @@ interface Props {
   date: Date;
   slug: string;
   tags?: string[];
+  cover?: string;
 }
 
-const { title, description, date, slug, tags = [] } = Astro.props;
+const { title, description, date, slug, tags = [], cover } = Astro.props;
 
 const formattedDate = date.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -16,8 +17,18 @@ const formattedDate = date.toLocaleDateString('en-US', {
 });
 ---
 
-<article class="group py-7 border-b border-ink-100 dark:border-ink-800/60 last:border-0">
+<article class="post-card group py-7 border-b border-ink-100 dark:border-ink-800/60 last:border-0 opacity-0 translate-y-4 transition-[opacity,transform] duration-500 ease-out">
   <a href={`/blog/${slug}`} class="block">
+    {cover && (
+      <div class="mb-4 overflow-hidden rounded-lg aspect-[2/1]">
+        <img
+          src={cover}
+          alt={title}
+          class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+          loading="lazy"
+        />
+      </div>
+    )}
     <div class="flex items-start justify-between gap-4">
       <div class="flex-1 min-w-0">
         <h2 class="font-serif text-xl text-ink-900 dark:text-ink-50 group-hover:text-accent transition-colors duration-150 leading-snug mb-2">
@@ -49,3 +60,32 @@ const formattedDate = date.toLocaleDateString('en-US', {
     </div>
   </a>
 </article>
+
+<script>
+  function initCards() {
+    const cards = document.querySelectorAll<HTMLElement>('.post-card');
+    if (!cards.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+            observer.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    cards.forEach((card, i) => {
+      card.style.transitionDelay = `${i * 60}ms`;
+      observer.observe(card);
+    });
+  }
+
+  initCards();
+  document.addEventListener('astro:page-load', initCards);
+</script>

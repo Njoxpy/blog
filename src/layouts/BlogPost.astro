@@ -5,6 +5,14 @@ import Footer from '../components/Footer.astro';
 import Comments from '../components/Comments.astro';
 import Newsletter from '../components/Newsletter.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
+import AISummary from '../components/AISummary.astro';
+import SponsoredBadge from '../components/SponsoredBadge.astro';
+import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import RelatedPosts from '../components/RelatedPosts.astro';
+
+interface Heading { depth: number; slug: string; text: string; }
+interface RelatedPost { slug: string; title: string; description: string; date: Date; tags: string[]; }
 
 interface Props {
   title: string;
@@ -13,9 +21,15 @@ interface Props {
   updatedDate?: Date;
   tags?: string[];
   minutesRead?: string;
+  slug: string;
+  cover?: string;
+  sponsored?: boolean;
+  affiliateLinks?: boolean;
+  headings?: Heading[];
+  relatedPosts?: RelatedPost[];
 }
 
-const { title, description, date, updatedDate, tags = [], minutesRead } = Astro.props;
+const { title, description, date, updatedDate, tags = [], minutesRead, slug, cover, sponsored, affiliateLinks, headings = [], relatedPosts = [] } = Astro.props;
 
 const formattedDate = date.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -24,15 +38,24 @@ const formattedDate = date.toLocaleDateString('en-US', {
 });
 ---
 
-<Base title={title} description={description} type="article" publishedDate={date} updatedDate={updatedDate} tags={tags}>
+<Base title={title} description={description} type="article" publishedDate={date} updatedDate={updatedDate} tags={tags} image={cover}>
   <ReadingProgress />
   <Header />
 
   <main class="pt-28 pb-16 px-6">
     <article class="max-w-2xl mx-auto">
 
+      <!-- Cover image -->
+      {cover && (
+        <div class="mb-10 overflow-hidden rounded-xl aspect-[2/1]">
+          <img src={cover} alt={title} class="w-full h-full object-cover" />
+        </div>
+      )}
+
       <!-- Post Header -->
       <header class="mb-12">
+        {sponsored && <SponsoredBadge />}
+
         <div class="flex items-center gap-3 mb-5 flex-wrap">
           {tags.map(tag => (
             <a href={`/tags/${tag}`} class="tag">{tag}</a>
@@ -58,10 +81,20 @@ const formattedDate = date.toLocaleDateString('en-US', {
         </div>
       </header>
 
+      <!-- Table of Contents -->
+      <TableOfContents headings={headings} />
+
+      <!-- AI Summary -->
+      <AISummary slug={slug} />
+
       <!-- Post Body -->
       <div class="prose prose-ink dark:prose-invert prose-sm sm:prose-base max-w-none" data-pagefind-body>
+        {affiliateLinks && <AffiliateDisclosure />}
         <slot />
       </div>
+
+      <!-- Related posts -->
+      <RelatedPosts posts={relatedPosts} />
 
       <!-- Newsletter -->
       <Newsletter />
