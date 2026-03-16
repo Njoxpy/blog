@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+
+// Count posts per tag
+const tagMap = new Map<string, number>();
+posts.forEach(post => {
+  post.data.tags.forEach(tag => {
+    tagMap.set(tag, (tagMap.get(tag) ?? 0) + 1);
+  });
+});
+
+const tags = [...tagMap.entries()].sort((a, b) => b[1] - a[1]);
+---
+
+<Base title="Tags">
+  <Header />
+
+  <main class="pt-28 pb-16 px-6">
+    <div class="max-w-2xl mx-auto">
+
+      <h1 class="font-serif text-3xl text-ink-900 dark:text-ink-50 mb-10">Tags</h1>
+
+      <div class="flex flex-wrap gap-3">
+        {tags.map(([tag, count]) => (
+          <a
+            href={`/tags/${tag}`}
+            class="group flex items-center gap-2 px-4 py-2 rounded-lg border border-ink-200 dark:border-ink-700
+                   hover:border-accent hover:text-accent transition-colors duration-150"
+          >
+            <span class="text-sm text-ink-700 dark:text-ink-300 group-hover:text-accent transition-colors duration-150">
+              {tag}
+            </span>
+            <span class="text-xs text-ink-400 dark:text-ink-600">{count}</span>
+          </a>
+        ))}
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Base>

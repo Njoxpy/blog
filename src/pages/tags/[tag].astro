@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import PostCard from '../../components/PostCard.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  const tags = [...new Set(posts.flatMap(p => p.data.tags))];
+  return tags.map(tag => ({
+    params: { tag },
+    props: { posts: posts.filter(p => p.data.tags.includes(tag)) },
+  }));
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+const sorted = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Base title={`#${tag}`} description={`All posts tagged with ${tag}`}>
+  <Header />
+
+  <main class="pt-28 pb-16 px-6">
+    <div class="max-w-2xl mx-auto">
+
+      <div class="flex items-center gap-3 mb-10">
+        <a href="/tags" class="text-sm text-ink-400 dark:text-ink-600 hover:text-ink-700 dark:hover:text-ink-300 transition-colors">
+          ← Tags
+        </a>
+        <span class="text-ink-200 dark:text-ink-700">/</span>
+        <span class="tag">{tag}</span>
+        <span class="text-sm text-ink-400 dark:text-ink-600">{sorted.length} posts</span>
+      </div>
+
+      {sorted.map(post => (
+        <PostCard
+          title={post.data.title}
+          description={post.data.description}
+          date={post.data.date}
+          slug={post.slug}
+          tags={post.data.tags}
+        />
+      ))}
+
+    </div>
+  </main>
+
+  <Footer />
+</Base>

@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base title="Search">
+  <Header />
+
+  <main class="pt-28 pb-16 px-6">
+    <div class="max-w-2xl mx-auto">
+
+      <h1 class="font-serif text-3xl text-ink-900 dark:text-ink-50 mb-10">Search</h1>
+
+      <div id="search" class="pagefind-search"></div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Base>
+
+<style is:global>
+  .pagefind-ui {
+    --pagefind-ui-font: inherit;
+    --pagefind-ui-primary: #e85d3c;
+    --pagefind-ui-text: var(--tw-prose-body, #45453d);
+    --pagefind-ui-background: transparent;
+    --pagefind-ui-border: #d5d5cc;
+    --pagefind-ui-border-radius: 0.5rem;
+    --pagefind-ui-scale: 0.9;
+  }
+
+  .dark .pagefind-ui {
+    --pagefind-ui-border: #45453d;
+  }
+
+  /* Search input */
+  .pagefind-ui__search-input {
+    background: transparent !important;
+    color: inherit !important;
+    border-color: var(--pagefind-ui-border) !important;
+    font-family: inherit !important;
+  }
+
+  /* Results */
+  .pagefind-ui__result-title a {
+    font-family: "Lora", serif !important;
+    color: #1a1a16 !important;
+  }
+  .dark .pagefind-ui__result-title a {
+    color: #f7f7f5 !important;
+  }
+  .pagefind-ui__result-excerpt {
+    color: #6a6a5e !important;
+  }
+  .dark .pagefind-ui__result-excerpt {
+    color: #87877a !important;
+  }
+</style>
+
+<script>
+  import('/pagefind/pagefind-ui.js').then(({ PagefindUI }) => {
+    new PagefindUI({
+      element: '#search',
+      showSubResults: false,
+      resetStyles: false,
+    });
+  }).catch(() => {
+    const el = document.getElementById('search');
+    if (el) el.innerHTML = '<p class="text-sm text-ink-400">Search index not available in dev mode. Run <code class="font-mono">npm run build</code> first.</p>';
+  });
+</script>

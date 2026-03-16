@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: http://blog.njox.dev/sitemap-index.xml

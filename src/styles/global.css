@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --accent: #e85d3c;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-ink-50 text-ink-800 dark:bg-ink-950 dark:text-ink-200;
+    @apply font-sans antialiased;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /* Selection */
+  ::selection {
+    background: rgba(232, 93, 60, 0.15);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { @apply bg-transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-ink-300 dark:bg-ink-700 rounded-full; }
+}
+
+@layer components {
+  .tag {
+    @apply inline-block px-2 py-0.5 text-xs font-medium rounded
+           bg-ink-100 text-ink-500
+           dark:bg-ink-800 dark:text-ink-400
+           hover:bg-ink-200 dark:hover:bg-ink-700
+           transition-colors duration-150;
+  }
+
+  .link-underline {
+    @apply underline underline-offset-4 decoration-ink-300 dark:decoration-ink-600
+           hover:decoration-accent transition-colors duration-150;
+  }
+}

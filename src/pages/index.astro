@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PostCard from '../components/PostCard.astro';
+
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Base title="Home">
+  <Header />
+
+  <main class="pt-28 pb-16 px-6">
+    <div class="max-w-2xl mx-auto">
+
+      <!-- Intro -->
+      <section class="mb-14">
+        <h1 class="font-serif text-3xl text-ink-900 dark:text-ink-50 mb-3">
+          Writing
+        </h1>
+        <p class="text-base text-ink-500 dark:text-ink-400 leading-relaxed max-w-lg">
+          Thoughts on building SaaS products in East Africa, engineering decisions,
+          and the slow craft of making useful things.
+        </p>
+      </section>
+
+      <!-- Post list -->
+      <section>
+        {posts.length === 0 ? (
+          <p class="text-sm text-ink-400 dark:text-ink-600">
+            No posts yet. First one is on the way.
+          </p>
+        ) : (
+          posts.map(post => (
+            <PostCard
+              title={post.data.title}
+              description={post.data.description}
+              date={post.data.date}
+              slug={post.slug}
+              tags={post.data.tags}
+            />
+          ))
+        )}
+      </section>
+
+    </div>
+  </main>
+
+  <Footer />
+</Base>

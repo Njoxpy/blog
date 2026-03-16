@@ -1,0 +1,66 @@
+---
+---
+
+<section class="my-16 px-6 py-8 rounded-xl border border-ink-100 dark:border-ink-800/60 bg-ink-50 dark:bg-ink-900/40">
+  <h3 class="font-serif text-lg text-ink-900 dark:text-ink-50 mb-1">
+    Stay in the loop
+  </h3>
+  <p class="text-sm text-ink-500 dark:text-ink-400 mb-5">
+    New posts on building tech in East Africa, SaaS, and AI — straight to your inbox.
+  </p>
+
+  <form id="newsletter-form" class="flex gap-2 flex-col sm:flex-row">
+    <input
+      type="email"
+      name="email"
+      required
+      placeholder="you@example.com"
+      class="flex-1 px-4 py-2 text-sm rounded-lg border border-ink-200 dark:border-ink-700
+             bg-white dark:bg-ink-900 text-ink-800 dark:text-ink-200
+             placeholder-ink-300 dark:placeholder-ink-600
+             focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent
+             transition-colors duration-150"
+    />
+    <button
+      type="submit"
+      class="px-5 py-2 text-sm font-medium rounded-lg
+             bg-ink-900 dark:bg-ink-50 text-ink-50 dark:text-ink-900
+             hover:bg-accent hover:dark:bg-accent hover:text-white
+             transition-colors duration-150"
+    >
+      Subscribe
+    </button>
+  </form>
+
+  <p id="newsletter-msg" class="hidden text-sm mt-3 text-ink-500 dark:text-ink-400"></p>
+</section>
+
+<script>
+  const form = document.getElementById('newsletter-form') as HTMLFormElement;
+  const msg  = document.getElementById('newsletter-msg') as HTMLElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value;
+
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      if (res.ok) {
+        form.innerHTML = '';
+        msg.textContent = '🎉 You\'re subscribed! Thanks for joining.';
+        msg.classList.remove('hidden');
+      } else {
+        msg.textContent = 'Something went wrong. Try again?';
+        msg.classList.remove('hidden');
+      }
+    } catch {
+      msg.textContent = 'Network error. Please try again.';
+      msg.classList.remove('hidden');
+    }
+  });
+</script>

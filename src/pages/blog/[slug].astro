@@ -1,0 +1,33 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BlogPost from '../../layouts/BlogPost.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts.map(post => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+// Rough reading time estimate
+const wordsPerMinute = 200;
+const words = post.body.trim().split(/\s+/).length;
+const minutes = Math.max(1, Math.round(words / wordsPerMinute));
+const minutesRead = `${minutes} min read`;
+---
+
+<BlogPost
+  title={post.data.title}
+  description={post.data.description}
+  date={post.data.date}
+  updatedDate={post.data.updatedDate}
+  tags={post.data.tags}
+  minutesRead={minutesRead}
+>
+  <Content />
+</BlogPost>

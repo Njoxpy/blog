@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base title="About" description="About Njox — developer building tech products in East Africa.">
+  <Header />
+
+  <main class="pt-28 pb-16 px-6">
+    <div class="max-w-2xl mx-auto">
+
+      <h1 class="font-serif text-3xl text-ink-900 dark:text-ink-50 mb-8">About</h1>
+
+      <div class="prose prose-ink dark:prose-invert prose-sm sm:prose-base max-w-none">
+        <p>
+          I'm Njox — a developer based in Tanzania, building software for East African markets.
+        </p>
+        <p>
+          Currently working on <strong>AmigoCare</strong>, an SMS-based chronic disease adherence platform
+          for patients in Tanzania, and <strong>ZanzBot</strong>, a WhatsApp booking automation tool
+          for Zanzibar tour operators.
+        </p>
+        <p>
+          I write about building SaaS products in emerging markets, technical decisions,
+          and occasionally about AI — mostly in the context of making things actually useful
+          for Swahili-speaking audiences.
+        </p>
+        <p>
+          You can also find me on <a href="https://twitter.com/njox16" target="_blank" rel="noopener noreferrer">Twitter</a>, <a href="https://www.linkedin.com/in/godbless-nyagawa/" target="_blank" rel="noopener noreferrer">Linkedin</a>
+          and <a href="https://github.com/Njoxpy" target="_blank" rel="noopener noreferrer">GitHub</a>.
+        </p>
+      </div>
+
+      <!-- Currently working on -->
+      <div class="mt-12 pt-8 border-t border-ink-100 dark:border-ink-800/60">
+        <h2 class="font-serif text-xl text-ink-900 dark:text-ink-50 mb-5">Currently building</h2>
+        <div class="space-y-4">
+          {[
+            { name: 'AmigoCare', desc: 'SMS-based chronic disease adherence for Tanzanian patients.', url: '#' },
+            { name: 'ZanzBot', desc: 'WhatsApp booking automation for Zanzibar tour operators.', url: '#' },
+            { name: 'AI Kwa Kiswahili', desc: 'AI education YouTube channel for Swahili speakers.', url: '#' },
+          ].map(project => (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-start gap-4 p-4 rounded-lg border border-ink-100 dark:border-ink-800/60 hover:border-ink-300 dark:hover:border-ink-600 transition-colors duration-150"
+            >
+              <div class="flex-1">
+                <div class="text-sm font-medium text-ink-800 dark:text-ink-200 group-hover:text-accent transition-colors duration-150 mb-0.5">
+                  {project.name}
+                </div>
+                <div class="text-xs text-ink-400 dark:text-ink-600 leading-relaxed">
+                  {project.desc}
+                </div>
+              </div>
+              <span class="text-ink-300 dark:text-ink-700 group-hover:text-accent mt-0.5 transition-colors duration-150">→</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Base>
