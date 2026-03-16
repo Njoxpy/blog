@@ -10,27 +10,30 @@
 <script>
   // Dynamically load Giscus with correct theme
   function loadGiscus() {
-    const isDark = document.documentElement.classList.contains('dark');
-    const script = document.createElement('script');
-    script.src = 'https://giscus.app/client.js';
+  const script = document.createElement("script");
+  script.src = "https://giscus.app/client.js";
 
-    // ↓ Replace with your own Giscus config from giscus.app
-    script.setAttribute('data-repo', 'Njoxpy/blog');
-    script.setAttribute('data-repo-id', 'R_kgDORn_OEQ');
-    script.setAttribute('data-category', 'Announcements');
-    script.setAttribute('data-category-id', 'DIC_kwDORn_OEc4C4gkb');
-    script.setAttribute('data-mapping', 'pathname');
-    script.setAttribute('data-strict', '0');
-    script.setAttribute('data-reactions-enabled', '1');
-    script.setAttribute('data-emit-metadata', '0');
-    script.setAttribute('data-input-position', 'top');
-    script.setAttribute('data-theme', isDark ? 'dark' : 'light');
-    script.setAttribute('data-lang', 'en');
-    script.setAttribute('crossorigin', 'anonymous');
-    script.async = true;
+  script.setAttribute("data-repo", "Njoxpy/blog");
+  script.setAttribute("data-repo-id", "R_kgDORn_OEQ");
+  script.setAttribute("data-category", "General");
+  script.setAttribute("data-category-id", "DIC_kwDORn_OEc4C4gkc");
+  script.setAttribute("data-mapping", "pathname");
+  script.setAttribute("data-strict", "0");
+  script.setAttribute("data-reactions-enabled", "1");
+  script.setAttribute("data-emit-metadata", "0");
+  script.setAttribute("data-input-position", "bottom");
+  script.setAttribute("data-theme", "preferred_color_scheme");
+  script.setAttribute("data-lang", "en");
+  script.setAttribute("data-loading", "lazy");
+  script.setAttribute("crossorigin", "anonymous");
 
-    document.getElementById('comments')?.appendChild(script);
+  script.async = true;
+
+  const container = document.getElementById("comments");
+  if (container) {
+    container.appendChild(script);
   }
+}
 
   loadGiscus();
 

@@ -4,16 +4,16 @@ A minimal, fast personal blog built with Astro, MDX, and Tailwind CSS.
 
 ## Stack
 
-| Layer | Tool |
-|---|---|
-| Framework | Astro 4 |
-| Writing | MDX |
-| Styling | Tailwind CSS + Typography plugin |
-| Comments | Giscus (GitHub Discussions) |
-| Newsletter | Resend |
-| Analytics | Umami (self-hosted) |
-| Hosting | Vercel |
-| DNS/CDN | Cloudflare |
+| Layer      | Tool                             |
+| ---------- | -------------------------------- |
+| Framework  | Astro 4                          |
+| Writing    | MDX                              |
+| Styling    | Tailwind CSS + Typography plugin |
+| Comments   | Giscus (GitHub Discussions)      |
+| Newsletter | Resend                           |
+| Analytics  | Umami (self-hosted)              |
+| Hosting    | Vercel                           |
+| DNS/CDN    | Cloudflare                       |
 
 ## Getting started
 
@@ -64,10 +64,6 @@ Push to GitHub → Vercel auto-deploys in ~30 seconds.
 git init
 git add .
 git commit -m "initial commit"
-git remote add origin https://github.com/yourusername/your-blog.git
+git remote add origin https://github.com/Njoxpy/blog.git
 git push -u origin main
 ```
-
-Then connect the repo on [vercel.com](https://vercel.com) — it auto-detects Astro.
-
-Add your env variables in the Vercel dashboard under Settings → Environment Variables.
