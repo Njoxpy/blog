@@ -43,4 +43,5 @@ jobs:
           script: |
             cd /home/blog
             npm install --omit=dev
-            pm2 restart blog
+            pm2 restart blog || pm2 start /home/blog/dist/server/entry.mjs --name blog
+            pm2 save
