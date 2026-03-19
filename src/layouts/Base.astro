@@ -27,7 +27,7 @@ const {
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
-const fullTitle = title === 'Home' ? 'Njox — Blog' : `${title} — Njox`;
+const fullTitle = title === 'Home' ? 'Njox | Blog' : `${title} | Njox`;
 const ogImage = new URL(image, siteUrl).href;
 
 // JSON-LD
@@ -58,7 +58,7 @@ const jsonLd = type === 'article' ? {
 } : {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Njox — Blog',
+  name: 'Njox | Blog',
   url: siteUrl,
   description,
   author: {

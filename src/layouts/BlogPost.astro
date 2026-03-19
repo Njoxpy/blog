@@ -2,10 +2,8 @@
 import Base from './Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Comments from '../components/Comments.astro';
-import Newsletter from '../components/Newsletter.astro';
+import WhatsAppCTA from '../components/WhatsAppCTA.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
-import AISummary from '../components/AISummary.astro';
 import SponsoredBadge from '../components/SponsoredBadge.astro';
 import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
 import TableOfContents from '../components/TableOfContents.astro';
@@ -84,9 +82,6 @@ const formattedDate = date.toLocaleDateString('en-US', {
       <!-- Table of Contents -->
       <TableOfContents headings={headings} />
 
-      <!-- AI Summary -->
-      <AISummary slug={slug} />
-
       <!-- Post Body -->
       <div class="prose prose-ink dark:prose-invert prose-sm sm:prose-base max-w-none" data-pagefind-body>
         {affiliateLinks && <AffiliateDisclosure />}
@@ -96,11 +91,8 @@ const formattedDate = date.toLocaleDateString('en-US', {
       <!-- Related posts -->
       <RelatedPosts posts={relatedPosts} />
 
-      <!-- Newsletter -->
-      <Newsletter />
-
-      <!-- Comments -->
-      <Comments />
+      <!-- WhatsApp CTA -->
+      <WhatsAppCTA />
 
     </article>
   </main>

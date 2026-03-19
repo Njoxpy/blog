@@ -4,7 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Base title="About" description="About Njox — developer building tech products in East Africa.">
+<Base title="About" description="About Njox, developer building tech products in East Africa.">
   <Header />
 
   <main class="pt-28 pb-16 px-6">
@@ -14,51 +14,28 @@ import Footer from '../components/Footer.astro';
 
       <div class="prose prose-ink dark:prose-invert prose-sm sm:prose-base max-w-none">
         <p>
-          I'm Njox — a developer based in Tanzania, building software for East African markets.
+          I'm a Full Stack Engineer based in Zanzibar, Tanzania, focused on building real products for real people, not just demos. From event ticketing platforms processing millions in transactions, to real estate web presences for island brands, I care about what ships.
         </p>
         <p>
-          Currently working on <strong>AmigoCare</strong>, an SMS-based chronic disease adherence platform
-          for patients in Tanzania, and <strong>ZanzBot</strong>, a WhatsApp booking automation tool
-          for Zanzibar tour operators.
+          I write about what I learn here, covering SaaS, AI, development, and building for East African markets.
         </p>
         <p>
-          I write about building SaaS products in emerging markets, technical decisions,
-          and occasionally about AI — mostly in the context of making things actually useful
-          for Swahili-speaking audiences.
-        </p>
-        <p>
-          You can also find me on <a href="https://twitter.com/njox16" target="_blank" rel="noopener noreferrer">Twitter</a>, <a href="https://www.linkedin.com/in/godbless-nyagawa/" target="_blank" rel="noopener noreferrer">Linkedin</a>
-          and <a href="https://github.com/Njoxpy" target="_blank" rel="noopener noreferrer">GitHub</a>.
+          If you have a problem worth solving, reach out via <a href="mailto:godblessnyagawa@gmail.com">email</a> or <a href="https://www.linkedin.com/in/godbless-nyagawa/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
         </p>
       </div>
 
-      <!-- Currently working on -->
-      <div class="mt-12 pt-8 border-t border-ink-100 dark:border-ink-800/60">
-        <h2 class="font-serif text-xl text-ink-900 dark:text-ink-50 mb-5">Currently building</h2>
-        <div class="space-y-4">
-          {[
-            { name: 'AmigoCare', desc: 'SMS-based chronic disease adherence for Tanzanian patients.', url: '#' },
-            { name: 'ZanzBot', desc: 'WhatsApp booking automation for Zanzibar tour operators.', url: '#' },
-            { name: 'AI Kwa Kiswahili', desc: 'AI education YouTube channel for Swahili speakers.', url: '#' },
-          ].map(project => (
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group flex items-start gap-4 p-4 rounded-lg border border-ink-100 dark:border-ink-800/60 hover:border-ink-300 dark:hover:border-ink-600 transition-colors duration-150"
-            >
-              <div class="flex-1">
-                <div class="text-sm font-medium text-ink-800 dark:text-ink-200 group-hover:text-accent transition-colors duration-150 mb-0.5">
-                  {project.name}
-                </div>
-                <div class="text-xs text-ink-400 dark:text-ink-600 leading-relaxed">
-                  {project.desc}
-                </div>
-              </div>
-              <span class="text-ink-300 dark:text-ink-700 group-hover:text-accent mt-0.5 transition-colors duration-150">→</span>
-            </a>
-          ))}
-        </div>
+      <div class="mt-10 pt-8 border-t border-ink-100 dark:border-ink-800">
+        <p class="text-sm text-ink-400 dark:text-ink-500 mb-4">Looking to hire? Grab my CV.</p>
+        <a
+          href="/GODBLESS_NYAGAWA_CV.pdf"
+          download
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-ink-200 dark:border-ink-700 text-ink-700 dark:text-ink-300 text-sm font-medium hover:border-accent hover:text-accent dark:hover:border-accent dark:hover:text-accent transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+          </svg>
+          Download CV
+        </a>
       </div>
 
     </div>
